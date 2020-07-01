@@ -41,7 +41,7 @@
 
     // append callback resize hide event
     function addResizeEvent(){
-        $(window).resize(config.resizeHide.bind(config));   
+        $(window).resize(config.resizeHide.bind(config));
     }
 
     // add button to DOM
@@ -66,6 +66,8 @@
         var linkStyle = '';
         var imgPath = '';
         var iconColor = '';
+
+        var linkTitle = config.linkTitle;
 
         // determine icon color
         iconColor = config.iconColor == 'b' ? 'b' : 'w';
@@ -95,7 +97,7 @@
         if(config.filter)
             filterClass = ' filter';
 
-        // build styles 
+        // build styles
         if(config.border.color != '' || config.backgroundColor != '' || !showMobile()){
             var boColor = 'border-color:' + config.border.color;
             var bgColor = 'background-color:' + config.backgroundColor;
@@ -103,19 +105,19 @@
             linkStyle = ' style="' + bgColor + ';' + boColor + ';' + display + '"';
         }
 
-        // build custom classes 
+        // build custom classes
         imgCClasses = imgCClasses.length > 0 ? imgCClasses + ' ' : imgCClasses;
         linkCClasses = linkCClasses.length > 0 ? linkCClasses + ' ' : linkCClasses;
 
         // build link and image classes
-        linkClasses = config.buttonClass + opClass + shClass + bpClass +  bmClass + pClass + szClass 
+        linkClasses = config.buttonClass + opClass + shClass + bpClass +  bmClass + pClass + szClass
                     + bwClass + bsClass + hideClass + filterClass + linkCClasses;
 
         imgClasses = config.imgClass + isClass + ' ' + config.arrowType + '-img' + imgCClasses;
 
         // append to DOM
-        $(that).prepend('<a href="#" class="' + linkClasses + '"' + linkStyle 
-                        + '><img src="' + imgPath + '" class="' + imgClasses + '"></a>');
+        $(that).prepend('<a href="#" class="' + linkClasses + '"' + linkStyle
+                        + ' title="' + linkTitle + '"><img src="' + imgPath + '" class="' + imgClasses + '"></a>');
     }
 
     // append button and create events
@@ -160,6 +162,7 @@
     * animateScroll: Handles the scroll animation.
     * fadeScroll: Handles the scroll button fade animation.
     * resizeHide: Determines if the button should be hidden during window resize.
+    * linkTitle: custom tag a link title.
     *
     */
     $.fn.toTopButton.defaults = {
@@ -173,7 +176,7 @@
         palette: '',
         iconColor: 'w',
         backgroundColor: '',
-        border : { 
+        border : {
             width: 0,
             color: ''
         },
@@ -191,6 +194,7 @@
         linkClasses: [],
         imgClasses: [],
         clickSelectors: [],
+        linkTitle: 'Go to top',
 
         // scroll animation method
         animateScroll: function(){
@@ -220,7 +224,7 @@
                 $('.' + config.buttonClass).css('display', 'none');
         }
     };
- 
+
 })( jQuery );
 
 // attach plugin to body, basic example
